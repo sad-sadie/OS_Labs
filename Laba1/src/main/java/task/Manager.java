@@ -60,6 +60,7 @@ public class Manager {
 
         if(confirmation.get()) {
             System.out.println("Overridden by system:");
+            confirmation.set(false);
         }
         System.out.println("Result: " + result);
         System.exit(1);
@@ -155,6 +156,10 @@ public class Manager {
 
     private void addShutDownHook() {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+
+            if(confirmation.get()) {
+                System.out.println("Overridden by system:");
+            }
 
             String computationFResult = computationF.getResult();
             if(computationFResult == null) {
